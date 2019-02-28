@@ -2508,7 +2508,7 @@ static int mov_read_tfhd(MOVContext *c, AVIOContext *pb, MOVAtom atom)
         frag->base_data_offset = flags & MOV_TFHD_BASE_DATA_OFFSET ?
             avio_rb64(pb) : frag->moof_offset;
         frag->track_id = 1; /* only one for smooth */
-        frag->stsd_id = 1;
+        frag->stsd_id = flags & MOV_TFHD_STSD_ID ? avio_rb32(pb) : 1;
         frag->duration = flags & MOV_TFHD_DEFAULT_DURATION ?
             avio_rb32(pb) : 0;
         frag->size = flags & MOV_TFHD_DEFAULT_SIZE ?
